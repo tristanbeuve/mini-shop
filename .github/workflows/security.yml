@@ -16,15 +16,15 @@ jobs:
       - run: npm ci
       - run: npm test
 
-    secrets:
-      name: Scanner de secrets
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v6
-          with:
-            fetch-depth: 0
-        - name: Scan gitleaks
-          run: |
-            docker run --rm -v "$PWD:/repo" \
-              ghcr.io/gitleaks/gitleaks:latest \
-              git /repo --config /repo/.gitleaks.toml --redact -v --exit-code=2
+  secrets:
+    name: Scanner de secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Scan gitleaks
+        run: |
+          docker run --rm -v "$PWD:/repo" \
+            ghcr.io/gitleaks/gitleaks:latest \
+            git /repo --config /repo/.gitleaks.toml --redact -v --exit-code=2
